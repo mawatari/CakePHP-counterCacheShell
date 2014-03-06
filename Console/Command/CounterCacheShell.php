@@ -80,6 +80,11 @@ class CounterCacheShell extends AppShell {
  *
  */
 	public function _outputModel() {
+		if (empty($this->_counterCacheModels)) {
+			$this->err('カウンターキャッシュが設定されているモデルが存在しません。');
+			$this->_stop();
+		}
+
 		$modelNameMaxLength = Hash::apply($this->_counterCacheModels, '{n}.model', function($s){
 			$ary = [];
 			foreach ($s as $model) {
